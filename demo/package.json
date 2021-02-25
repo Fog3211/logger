@@ -1,0 +1,16 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run dev_node && npm run dev_brower",
+    "dev_brower": "parcel index.html --port 7099 --out-dir build --no-cache",
+    "dev_node": "node index.js"
+  },
+  "author": "Fog3211",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "1.12.4"
+  }
+}

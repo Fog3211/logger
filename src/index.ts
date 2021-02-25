@@ -1,6 +1,7 @@
-import type { LogLevel, LogMethod, LoggerOption } from './index.d'
+import type { LogLevel, LogMethod, LogOptions } from './index.d'
 
 enum LogLevelPriority {
+  'DETAIL' = 1,
   'INFO' = 2,
   'SUCCESS' = 3,
   'WARN' = 3,
@@ -13,16 +14,14 @@ enum ColorPlates {
   'ERROR' = 'color: white; background-color: #D33F49',
   'SUCCESS' = 'color: white; background-color: #95B46A'
 };
-
 enum NodeColorPlates {
-  'INFO' = '\x1b[37m',
-  'WARN' = '\x1b[30m',
-  'ERROR' = '\x1b[31m',
-  'SUCCESS' = '\x1b[32m'
+  'INFO' = '\x1b[37m%s',
+  'WARN' = '\x1b[33m%s',
+  'ERROR' = '\x1b[31m%s',
+  'SUCCESS' = '\x1b[32m%s'
 };
 const DEFAULT_LOGGER_LEVEL = 'INFO'
 const DEFAULT_LOGGER_PREFIX = 'AIRMUS-LOGGER'
-
 export default class Logger {
   private logLevel: LogLevel = DEFAULT_LOGGER_LEVEL;
   private logPrefix: string = DEFAULT_LOGGER_PREFIX;
@@ -30,45 +29,49 @@ export default class Logger {
   public constructor({
     logLevel,
     logPrefix
-  }: LoggerOption = {}) {
+  }: LogOptions = {}) {
     this.logLevel = logLevel ?? DEFAULT_LOGGER_LEVEL
     this.logPrefix = logPrefix ?? DEFAULT_LOGGER_PREFIX
   }
 
   public logInfo<T>(...msgs: T[]): void {
-    if (LogLevelPriority[this.logLevel as LogLevel] <= LogLevelPriority['INFO']) {
+    if (LogLevelPriority[this.logLevel] <= LogLevelPriority['INFO']) {
       this.logOptimize('INFO', msgs)
     }
   }
 
   public logSuccess<T>(...msgs: T[]): void {
-    if (LogLevelPriority[this.logLevel as LogLevel] <= LogLevelPriority['SUCCESS']) {
+    if (LogLevelPriority[this.logLevel] <= LogLevelPriority['SUCCESS']) {
       this.logOptimize('SUCCESS', msgs)
     }
   }
 
   public logWarn<T>(...msgs: T[]): void {
-    if (LogLevelPriority[this.logLevel as LogLevel] <= LogLevelPriority['WARN']) {
+    if (LogLevelPriority[this.logLevel] <= LogLevelPriority['WARN']) {
       this.logOptimize('WARN', msgs)
     }
   }
 
   public logErr<T>(...msgs: T[]): void {
-    if (LogLevelPriority[this.logLevel as LogLevel] <= LogLevelPriority['ERROR']) {
+    if (LogLevelPriority[this.logLevel] <= LogLevelPriority['ERROR']) {
       this.logOptimize('ERROR', msgs)
     }
   }
 
-  private logOptimize<T>(method: LogMethod, ...msg: T[]): void {
+  private logOptimize<T>(method: LogMethod, msg: T[]): void {
     const inBrowser = typeof window !== 'undefined';
-    const prefix = inBrowser ? [ColorPlates[method], this.logPrefix] : [NodeColorPlates[method], this.logPrefix]
-
-    if (method === 'ERROR') {
-      console.error(['%c%s', ...prefix, ...msg]);
-    } else if (method === 'WARN') {
-      console.warn(['%c%s', ...prefix, ...msg]);
+    const logMsg = inBrowser ? [ColorPlates[method], `[${this.logPrefix}]:`, ...msg] : [NodeColorPlates[method], `[${this.logPrefix}]:`, ...msg]
+   
+    if (inBrowser) {
+      if (method === 'ERROR') {
+        console.error('%c%s', ...logMsg);
+      } else if (method === 'WARN') {
+        console.warn('%c%s', ...logMsg);
+      } else {
+        console.log('%c%s', ...logMsg);
+      }
     } else {
-      console.log(['%c%s', ...prefix, ...msg]);
+      console.log(...logMsg);
     }
   }
 }

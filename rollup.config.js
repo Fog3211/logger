@@ -6,6 +6,7 @@ import {
   terser
 } from 'rollup-plugin-terser';
 import alias from '@rollup/plugin-alias';
+import filesize from 'rollup-plugin-filesize';
 import path from 'path';
 import del from 'del';
 import pkg from './package.json';
@@ -46,7 +47,8 @@ const nodePlugins = [
   commonjs({
     include: 'node_modules/**'
   }),
-  typescript()
+  typescript(),
+  filesize()
 ];
 
 export default () => {

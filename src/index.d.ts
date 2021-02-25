@@ -15,11 +15,11 @@ export type LogMethod =
   | 'SUCCESS'
   | 'ERROR';
 
-export interface LoggerOption {
+export interface LogOptions {
   logLevel?: LogLevel;
   logPrefix?: string;
 }
 
-declare module 'easy-tracer' {
+declare module '@airmus/logger' {
 
 }
