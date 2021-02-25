@@ -1,6 +1,6 @@
 {
   "name": "@airmus/logger",
-  "version": "0.0.0-beta-1",
+  "version": "0.0.0",
   "description": "A javaScript library for easy control of logging",
   "main": "dist/lib/index.js",
   "module": "dist/es/index.js",

@@ -19,7 +19,15 @@ export interface LogOptions {
   logLevel?: LogLevel;
   logPrefix?: string;
 }
+export declare class Logger {
+  private logLevel;
+  private logPrefix;
+  private _logOptimize;
 
-declare module '@airmus/logger' {
+  constructor(options?: LogOptions)
 
+  logErr: <T = any>(msgs: T[]) => void
+  logInfo: <T = any>(msgs: T[]) => void
+  logSuccess: <T = any>(msgs: T[]) => void
+  logWarn: <T = any>(msgs: T[]) => void
 }
