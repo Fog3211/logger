@@ -1,0 +1,5 @@
+dist/
+es/
+demo/
+node_modules/
+src/**/__test__/*

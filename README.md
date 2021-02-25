@@ -1,2 +1,3 @@
-# logger
-A javaScript library for control log 
+# @airmus/logger
+
+A javaScript library for easy control of logging
