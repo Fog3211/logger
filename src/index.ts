@@ -61,7 +61,7 @@ export default class Logger {
   private logOptimize<T>(method: LogMethod, msg: T[]): void {
     const inBrowser = typeof window !== 'undefined';
     const logMsg = inBrowser ? [ColorPlates[method], `[${this.logPrefix}]:`, ...msg] : [NodeColorPlates[method], `[${this.logPrefix}]:`, ...msg]
-   
+
     if (inBrowser) {
       if (method === 'ERROR') {
         console.error('%c%s', ...logMsg);
