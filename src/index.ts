@@ -34,31 +34,31 @@ export default class Logger {
     this.logPrefix = logPrefix ?? DEFAULT_LOGGER_PREFIX
   }
 
-  public logInfo<T>(...msgs: T[]): void {
+  public logInfo(msgs: IArguments): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['INFO']) {
       this.logOptimize('INFO', msgs)
     }
   }
 
-  public logSuccess<T>(...msgs: T[]): void {
+  public logSuccess(msgs: IArguments): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['SUCCESS']) {
       this.logOptimize('SUCCESS', msgs)
     }
   }
 
-  public logWarn<T>(...msgs: T[]): void {
+  public logWarn(msgs: IArguments): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['WARN']) {
       this.logOptimize('WARN', msgs)
     }
   }
 
-  public logErr<T>(...msgs: T[]): void {
+  public logErr<T>(msgs: IArguments): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['ERROR']) {
       this.logOptimize('ERROR', msgs)
     }
   }
 
-  private logOptimize<T>(method: LogMethod, msg: T[]): void {
+  private logOptimize(method: LogMethod, msg: IArguments): void {
     const inBrowser = typeof window !== 'undefined';
     const logMsg = inBrowser ? [ColorPlates[method], `[${this.logPrefix}]:`, ...msg] : [NodeColorPlates[method], `[${this.logPrefix}]:`, ...msg]
 

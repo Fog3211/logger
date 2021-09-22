@@ -26,8 +26,8 @@ export declare class Logger {
 
   constructor(options?: LogOptions)
 
-  logErr: <T = any>(...msgs: T[]) => void
-  logInfo: <T = any>(...msgs: T[]) => void
-  logSuccess: <T = any>(...msgs: T[]) => void
-  logWarn: <T = any>(...msgs: T[]) => void
+  logErr: (msgs: IArguments) => void
+  logInfo: (msgs: IArguments) => void
+  logSuccess: (msgs: IArguments) => void
+  logWarn: (msgs: IArguments) => void
 }
