@@ -1,7 +1,7 @@
 .DS_Store
 npm-debug.log*
 yarn-error.log
-# package-lock.json
+package-lock.json
 # yarn.lock
 .nyc_output
 coverage
@@ -11,3 +11,4 @@ node_modules
 .vscode/settings.json
 .cache
 demo/build
+pnpm-lock.yaml

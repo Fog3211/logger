@@ -94,9 +94,9 @@ export default () => {
       })
     ],
     output: [{
-      file: 'dist/easy-tracker.browser.js',
+      file: 'dist/logger.browser.js',
       format: 'umd',
-      name: '$tracer',
+      name: '$logger',
       banner,
       compact: true
     }]
