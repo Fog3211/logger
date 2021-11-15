@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run dev_node && npm run dev_brower",
     "dev_brower": "parcel index.html --port 7099 --out-dir build --no-cache",
-    "dev_node": "node index.js"
+    "dev_node": "tsc index.ts && node index.js"
   },
   "author": "Fog3211",
   "license": "MIT",

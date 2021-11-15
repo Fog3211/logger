@@ -34,37 +34,37 @@ export default class Logger {
     this.logPrefix = logPrefix ?? DEFAULT_LOGGER_PREFIX
   }
 
-  public logInfo(msgs: IArguments): void {
+  public logInfo(...msgs: any[]): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['INFO']) {
       this.logOptimize('INFO', msgs)
     }
   }
 
-  public logSuccess(msgs: IArguments): void {
+  public logSuccess(...msgs: any[]): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['SUCCESS']) {
       this.logOptimize('SUCCESS', msgs)
     }
   }
 
-  public logWarn(msgs: IArguments): void {
+  public logWarn(...msgs: any[]): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['WARN']) {
       this.logOptimize('WARN', msgs)
     }
   }
 
-  public logErr<T>(msgs: IArguments): void {
+  public logErr(...msgs: any[]): void {
     if (LogLevelPriority[this.logLevel] <= LogLevelPriority['ERROR']) {
       this.logOptimize('ERROR', msgs)
     }
   }
 
-  private logOptimize(method: LogMethod, msg: IArguments): void {
+  private logOptimize(method: LogMethod, msgs: any[]): void {
     const inBrowser = typeof window !== 'undefined';
-    const logMsg = inBrowser ? [ColorPlates[method], `[${this.logPrefix}]:`, ...msg] : [NodeColorPlates[method], `[${this.logPrefix}]:`, ...msg]
+    const logMsg = inBrowser ? [ColorPlates[method], `[${this.logPrefix}]:`, ...msgs] : [NodeColorPlates[method], `[${this.logPrefix}]:`, ...msgs]
 
     if (inBrowser) {
       if (method === 'ERROR') {
-        console.error('%c%s', ...logMsg);
+        console.error('%c%s',...logMsg);
       } else if (method === 'WARN') {
         console.warn('%c%s', ...logMsg);
       } else {

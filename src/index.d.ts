@@ -1,9 +1,8 @@
 
-export type Any_Obj = {
-  [propsName: string]: any
-}
+export type Any_Obj = Record<string, any>
 
 export type LogLevel =
+  | 'DETAIL'
   | 'INFO'
   | 'WARN'
   | 'ERROR'
