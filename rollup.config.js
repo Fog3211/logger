@@ -1,4 +1,4 @@
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
@@ -34,7 +34,7 @@ const nodePlugins = [
   alias({
     resolve: ['.js', '.json', '.ts'],
     entries: {
-      src: pathResolve('@')
+      src: pathResolve('@'),
     },
   }),
   resolve({
@@ -44,7 +44,11 @@ const nodePlugins = [
   commonjs({
     include: 'node_modules/**',
   }),
-  typescript(),
+  typescript({
+    abortOnError: false,
+    tsconfig: './tsconfig.json',
+    clean: true,
+  }),
   filesize(),
 ]
 

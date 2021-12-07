@@ -29,4 +29,5 @@ export declare class Logger {
   logInfo: (...msgs: any[]) => void
   logSuccess: (...msgs: any[]) => void
   logWarn: (...msgs: any[]) => void
+  setLevel: (level: LogLevel) => void
 }
