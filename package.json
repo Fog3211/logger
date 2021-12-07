@@ -23,6 +23,11 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "files": [
+    "dist",
+    "yarn.lock",
+    "README.md"
+  ],
   "keywords": [
     "logger",
     "log",
